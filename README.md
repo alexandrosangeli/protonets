@@ -9,7 +9,7 @@ Provide support for implementing three basic neural network architectures:
 - RNN
 
 ### What this is
-- An attempt to better understand how NN frameworks may work, including autograd.
+- An attempt to better understand how NN frameworks may work under the hood, including autograd.
 - Curosioty treatment
   
 ### What this is not

@@ -15,13 +15,13 @@ def rand_normal(n):
 
     rands = []
     i = 0
-    for i in range(n//2 + 1):
+    for i in range(n // 2 + 1):
         u1 = random.uniform(0, 1)
         u2 = random.uniform(0, 1)
 
         z0 = math.sqrt(-2 * math.log(u1)) * math.cos(2 * math.pi * u2)
         z1 = math.sqrt(-2 * math.log(u1)) * math.sin(2 * math.pi * u2)
-        
+
         rands.append(z0)
         rands.append(z1)
 
@@ -31,12 +31,12 @@ def rand_normal(n):
 def rand_normal_slow(n):
     if n < 1:
         return None
-    
+
     rands = []
     for i in range(n):
         u1 = random.uniform(0, 1)
         u2 = random.uniform(0, 1)
-        
+
         z0 = math.sqrt(-2 * math.log(u1)) * math.cos(2 * math.pi * u2)
         z1 = math.sqrt(-2 * math.log(u1)) * math.sin(2 * math.pi * u2)
 
@@ -47,4 +47,11 @@ def rand_normal_slow(n):
 
 def dot(arr0, arr1):
     # Calculates the dot product between two arrays
-    return sum(x*y for x, y in zip(arr0, arr1))
+    return sum(x * y for x, y in zip(arr0, arr1))
+
+
+def check_bottleneck(outs):
+    for i, n in enumerate(outs):
+        if n == 1 and i != len(outs) - 1:
+            return True
+    return False

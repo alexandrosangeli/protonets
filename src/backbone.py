@@ -52,7 +52,7 @@ class Value:
         out = Value(y, [self], f"(sig({self.label})")
         
         def _backward():
-            self.grad += y * (1 - y)
+            self.grad += y * (1 - y) * out.grad
             
         out._backward = _backward
         return out
@@ -62,11 +62,11 @@ class Value:
             return self + (- other)
 
 
-    def __radd__(self, other): # other + self
+    def __radd__(self, other):
         return self + other
     
 
-    def __rsub__(self, other): # other + self
+    def __rsub__(self, other):
         return self + (- other)
     
 

@@ -41,3 +41,17 @@ class MLP:
             outs = layer(outs)
 
         return outs
+    
+    def parameters(self):
+        params = []
+        for layer in self.layers:
+            for neuron in layer.neurons:
+                for weight in neuron.w:
+                    params.append(weight)
+        return params
+    
+    def zero_grad(self):
+        for layer in self.layers:
+            for neuron in layer.neurons:
+                for weight in neuron.w:
+                    weight.grad = 0.0

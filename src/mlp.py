@@ -63,3 +63,8 @@ class MLP:
 
     def __repr__(self):
         return "\n".join([str(layer) for layer in self.layers])
+
+    def step(self, lr, n=1):
+        for _ in range(n):
+            for p in self.parameters():
+                p.data -= lr * p.grad

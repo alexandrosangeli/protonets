@@ -39,6 +39,7 @@ class Value:
         return out
 
     def __pow__(self, other):
+        other = other if isinstance(other, Value) else Value(other)
         out = Value(
             self.data ** other.data, [self, other], f"({self.label})^{other.label}"
         )
@@ -63,6 +64,9 @@ class Value:
         out._backward = _backward
         return out
 
+    def __truediv__(self, other):
+        return self * other ** -1
+
     def __sub__(self, other):
         return self + (-other)
 
@@ -74,6 +78,9 @@ class Value:
 
     def __rmul__(self, other):
         return self * other
+
+    def __neg__(self):
+        return self * -1
 
     def backward(self):
         topo = []

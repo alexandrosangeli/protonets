@@ -1,5 +1,8 @@
-import random
+from collections.abc import Iterable
 import math
+import random
+
+from backbone import Value
 
 
 def rand_normal(n):
@@ -51,7 +54,29 @@ def dot(arr0, arr1):
 
 
 def check_bottleneck(outs):
+    """
+        Return true if a hidden layer of an MLP has an output size of 1,
+        otherwise return False.
+    """
     for i, n in enumerate(outs):
         if n == 1 and i != len(outs) - 1:
             return True
     return False
+
+
+def mse_loss(y_true, y_pred):
+    """
+        Mean squared loss
+    """
+    y_true = [y_true] if not isinstance(y_true, Iterable) else y_true
+    y_pred = [y_pred] if not isinstance(y_pred, Iterable) else y_pred
+
+    assert len(y_true) == len(y_pred), "Size of predictions and targets is inconsistent"
+
+    size = len(y_true)
+    for i in range(size):
+        y_true[i] = Value(y_true[i]) if not isinstance(y_true[i], Value) else y_true[i]
+        y_pred[i] = Value(y_pred[i]) if not isinstance(y_pred[i], Value) else y_pred[i]
+
+    loss = sum([(y - y_) ** 2 for y, y_ in zip(y_true, y_pred)]) / size
+    return loss

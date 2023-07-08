@@ -49,7 +49,6 @@ def test_grads():
 def test_step():
     mlp, xs = rand_mlp_and_input()
     target = random.randint(1, 10)
-    params = mlp.parameters()
 
     out_before = mlp(xs)
     loss_before = mse_loss(target, out_before)

@@ -4,6 +4,7 @@ from mlp import MLP
 from utils import mse_loss
 import math
 
+# TODO: Split into train/test sets and evaluate
 
 data = pd.read_csv("../data/wine_quality/winequality-red.csv")
 
